@@ -6,8 +6,9 @@ public class GraphConnectedComponents
 {
     static bool[,] visited;
 
-    static char[,] numbers = new char[6, 8] { { 'a', 'a', 'c', 'c', 'c', 'a', 'a', 'c' },
-{'b', 'a', 'a', 'a', 'a', 'c', 'c', 'c' }, { 'b', 'a', 'a', 'b', 'a', 'c', 'c', 'c' }, { 'b', 'b', 'd', 'a', 'a', 'c', 'c', 'c' }, { 'c', 'c', 'd', 'c', 'c', 'c', 'c', 'c' }, { 'c', 'c', 'd', 'c', 'c', 'c', 'c', 'c' }};
+    private static char[,] numbers;
+    //static char[,] numbers = new char[6, 8] { { 'a', 'a', 'c', 'c', 'c', 'a', 'a', 'c' },
+//{'b', 'a', 'a', 'a', 'a', 'c', 'c', 'c' }, { 'b', 'a', 'a', 'b', 'a', 'c', 'c', 'c' }, { 'b', 'b', 'd', 'a', 'a', 'c', 'c', 'c' }, { 'c', 'c', 'd', 'c', 'c', 'c', 'c', 'c' }, { 'c', 'c', 'd', 'c', 'c', 'c', 'c', 'c' }};
 
     static void DFS(int row, int col, char currentChar)
     {
@@ -43,7 +44,24 @@ public class GraphConnectedComponents
     {
         int areas = 0;
         var counter = new SortedDictionary<char, int>();
-        visited = new bool[6, 8];
+        var rows = int.Parse(Console.ReadLine());
+        var firstRow = Console.ReadLine().ToCharArray();
+        numbers = new char[rows, firstRow.Length];
+        visited = new bool[rows, firstRow.Length];
+
+        for (int col = 0; col < firstRow.Length; col++)
+        {
+            numbers[0, col] = firstRow[col];
+        }
+        for (int row = 1; row < numbers.GetLength(0); row++)
+        {
+            var input = Console.ReadLine().ToCharArray();
+            for (int col = 0; col < numbers.GetLength(1); col++)
+            {
+                numbers[row, col] = input[col];
+            }
+        }
+
 
         for (int row = 0; row < numbers.GetLength(0); row++)
         {

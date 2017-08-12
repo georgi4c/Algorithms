@@ -42,10 +42,10 @@ public class TopologicalSorter
             graph.Remove(nodeToRemove);
             removedNodes.Add(nodeToRemove);
         }
-        foreach (var item in graph)
-        {
-            Console.WriteLine($"{item.Key}    {string.Join(", ", item.Value)}");
-        }
+        //foreach (var item in graph)
+        //{
+        //    Console.WriteLine($"{item.Key}    {string.Join(", ", item.Value)}");
+        //}
         if (graph.Count > 1)
         {
             Console.WriteLine("Acyclic: No");
@@ -68,14 +68,35 @@ public class TopologicalSorter
         //    { "conditionals", new List<string>() { "loops" } },
         //};
 
-        var graph = new Dictionary<string, List<string>>() {
-            { "A", new List<string>() { "B", "C" } },
-            { "B", new List<string>() { "D", "E", "A" } },
-            { "C", new List<string>() { "A", "F" } },
-            { "D", new List<string>() { "F", "B" } },
-            { "E", new List<string>() { "B" } },
-            { "F", new List<string>() { "D", "C"} },
-        };
+        //var graph = new Dictionary<string, List<string>>() {
+        //    { "A", new List<string>() { "B", "C" } },
+        //    { "B", new List<string>() { "D", "E", "A" } },
+        //    { "C", new List<string>() { "A", "F" } },
+        //    { "D", new List<string>() { "F", "B" } },
+        //    { "E", new List<string>() { "B" } },
+        //    { "F", new List<string>() { "D", "C"} },
+        //};
+        var graph = new Dictionary<string, List<string>>();
+        while (true)
+        {
+            var input = Console.ReadLine().Split('-').ToArray();
+            if (input.Length < 2)
+            {
+                break;
+            }
+            string first = input[0];
+            string second = input[1];
+            if (!graph.ContainsKey(first))
+            {
+                graph[first] = new List<string>();
+            }
+            if (!graph.ContainsKey(second))
+            {
+                graph[second] = new List<string>();
+            }
+            graph[first].Add(second);
+            graph[second].Add(first);
+        }
 
         var topSorter = new TopologicalSorter(graph);
         topSorter.TopSort();

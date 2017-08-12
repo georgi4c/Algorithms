@@ -22,6 +22,14 @@ namespace DistanceBetweenVertices
         static int start = 5;
         static int end = 6;
 
+
+        public static void Main()
+        {
+            // Start DFS from node 4 (Bourgas)
+
+            TraverseBFS(start);
+        }
+
         public static void TraverseBFS(int node)
         {
             var nodes = new Queue<int>();
@@ -60,10 +68,5 @@ namespace DistanceBetweenVertices
             Console.WriteLine("-1");
         }
 
-        public static void Main()
-        {
-            // Start DFS from node 4 (Bourgas)
-            TraverseBFS(start);
-        }
     }
 }
